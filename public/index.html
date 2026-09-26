@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Soundroom — музыкальный плеер</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">♫</span><span>soundroom</span></div>
+      <div class="side-heading"><span class="tiny-bars">Ⅱ</span> КАТЕГОРИИ</div>
+      <nav id="category-nav" class="category-nav" aria-label="Музыкальные категории">
+        <button class="category active" data-category="jazz"><span class="category-icon jazz-icon">♫</span><span class="category-copy"><b>Jazz</b><small>Джазовая коллекция</small></span><span class="nav-eq">▮</span></button>
+        <button class="category" data-category="classic"><span class="category-icon classic-icon">♫</span><span class="category-copy"><b>Classic</b><small>Классическая музыка</small></span><span class="nav-eq">▮</span></button>
+        <button class="category" data-category="blues"><span class="category-icon blues-icon">♫</span><span class="category-copy"><b>Blues</b><small>Блюзовая коллекция</small></span><span class="nav-eq">▮</span></button>
+      </nav>
+      <div class="sidebar-note"><span class="note-dot"></span> Музыка для каждого момента</div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar"><div class="breadcrumbs">Коллекция <span>/</span> <b id="crumb-category">Jazz</b></div><button id="theme-toggle" class="round-btn" aria-label="Переключить тему" title="Переключить тему">☼</button></header>
+      <section class="playlist-hero">
+        <div class="cover-art" id="hero-cover"><span class="cover-glyph">♫</span><span class="cover-orbit"></span></div>
+        <div class="hero-copy"><p class="eyebrow">ВАША МУЗЫКА</p><h1 id="playlist-title">Jazz</h1><p id="playlist-meta">Подборка треков • Soundroom</p><p class="hero-caption">Слушайте любимое. Открывайте новое.</p></div>
+      </section>
+      <section class="playlist-section">
+        <div class="list-toolbar"><div><span class="section-kicker">PLAYLIST</span><h2>Треки</h2></div><span class="track-count" id="track-count">Загрузка…</span></div>
+        <div class="table-head"><span>#</span><span>НАЗВАНИЕ</span><span class="duration-head">◷</span></div>
+        <div id="track-list" class="track-list" aria-live="polite"></div>
+        <p id="status-message" class="status-message" role="status">Загружаем вашу музыку…</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="player">
+    <div class="now-playing">
+      <div class="mini-cover" id="mini-cover">♫</div><div class="now-copy"><b id="now-title">Выберите трек</b><span id="now-artist">—</span></div>
+      <button id="like-btn" class="icon-btn like-btn" aria-label="Отметить трек" title="Отметить трек">♡</button>
+    </div>
+    <div class="playback">
+      <div class="transport">
+        <button id="shuffle-btn" class="icon-btn subtle" aria-label="Перемешать" title="Перемешать">⤨</button>
+        <button id="prev-btn" class="icon-btn" aria-label="Предыдущий трек" title="Предыдущий">|◀</button>
+        <button id="play-btn" class="play-btn" aria-label="Воспроизвести" title="Воспроизвести">▶</button>
+        <button id="next-btn" class="icon-btn" aria-label="Следующий трек" title="Следующий">▶|</button>
+        <button id="repeat-btn" class="icon-btn subtle" aria-label="Повтор" title="Повтор">↻</button>
+      </div>
+      <div class="timeline"><span id="current-time">0:00</span><input id="progress" type="range" min="0" max="1000" value="0" aria-label="Позиция воспроизведения"><span id="duration">0:00</span></div>
+    </div>
+    <div class="volume-control"><button id="mute-btn" class="icon-btn" aria-label="Выключить звук" title="Выключить звук">◖))</button><input id="volume" type="range" min="0" max="100" value="70" aria-label="Громкость"></div>
+  </footer>
+  <script src="app.js"></script>
+</body></html>

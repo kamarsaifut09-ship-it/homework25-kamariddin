@@ -1,0 +1,562 @@
+/* ==========================================================================
+   Переменные и темы
+   ========================================================================== */
+:root {
+  --bg-main: #121214;
+  --bg-sidebar: #18181c;
+  --bg-card: #202025;
+  --bg-hover: #2a2a32;
+  --bg-active: #221d33;
+  --bg-player: #0d0d0f;
+  
+  --text-main: #ffffff;
+  --text-muted: #8e8e99;
+  --text-sub: #b3b3be;
+
+  --accent-purple: #7c3aed;
+  --accent-purple-hover: #6d28d9;
+  --accent-light: #9333ea;
+  
+  --border-color: rgba(255, 255, 255, 0.06);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Светлая тема */
+body.light-theme {
+  --bg-main: #f0f0f4;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-hover: #f4f4f8;
+  --bg-active: #f3e8ff;
+  --bg-player: #e4e4e9;
+  
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-sub: #4b5563;
+
+  --border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   Базовые сбросы
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Макет приложения (App Shell)
+   ========================================================================== */
+.app-shell {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 80px);
+  padding: 12px;
+  gap: 12px;
+}
+
+/* --- Боковая панель (Sidebar) --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.brand-mark {
+  color: var(--accent-purple);
+}
+
+.side-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.category-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.category:hover {
+  background-color: var(--bg-hover);
+}
+
+.category.active {
+  background-color: var(--bg-active);
+}
+
+.category-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.jazz-icon { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+.classic-icon { background: linear-gradient(135deg, #f97316, #ea580c); }
+.blues-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+.category-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.category-copy b {
+  font-size: 0.9rem;
+}
+
+.category-copy small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.nav-eq {
+  display: none;
+  color: var(--accent-purple);
+  font-size: 0.8rem;
+}
+
+.category.active .nav-eq {
+  display: block;
+}
+
+.sidebar-note {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.note-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+}
+
+/* --- Главная панель (Main Panel) --- */
+.main-panel {
+  flex: 1;
+  background-color: var(--bg-sidebar);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.breadcrumbs {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.breadcrumbs span {
+  margin: 0 4px;
+}
+
+.breadcrumbs b {
+  color: var(--text-main);
+}
+
+.round-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+.round-btn:hover {
+  background-color: var(--bg-card);
+}
+
+/* --- Hero Секция --- */
+.playlist-hero {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.cover-art {
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(135deg, #a855f7, #6d28d9);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+  position: relative;
+}
+
+.cover-glyph {
+  font-size: 3.5rem;
+  color: white;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.hero-copy h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 4px 0 8px 0;
+}
+
+#playlist-meta {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+}
+
+.hero-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* --- Таблица треков --- */
+.playlist-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.section-kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.list-toolbar h2 {
+  font-size: 1.4rem;
+}
+
+.track-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.table-head {
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 8px;
+}
+
+.duration-head {
+  text-align: right;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.track-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.track-row:hover {
+  background-color: var(--bg-hover);
+}
+
+.track-row.active {
+  background-color: var(--bg-active);
+}
+
+.track-num {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.track-row.active .track-num {
+  color: var(--accent-purple);
+  font-weight: bold;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.track-thumb {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.track-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.track-row.active .track-title {
+  color: var(--accent-purple);
+}
+
+.track-artist {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.track-duration {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.status-message {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Нижняя панель (Player Footer)
+   ========================================================================== */
+.player {
+  height: 80px;
+  background-color: var(--bg-player);
+  border-top: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.now-playing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-cover {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #a855f7, #6d28d9);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.now-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.now-copy b {
+  font-size: 0.85rem;
+}
+
+.now-copy span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  color: var(--text-sub);
+  font-size: 1rem;
+  padding: 6px;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--text-main);
+}
+
+.icon-btn.active {
+  color: var(--accent-purple);
+}
+
+.playback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.play-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--accent-purple);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.play-btn:hover {
+  background-color: var(--accent-purple-hover);
+  transform: scale(1.05);
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Стилизация слайдеров (Range inputs) */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--bg-hover);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-main);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.volume-control input[type="range"] {
+  width: 90px;
+}
